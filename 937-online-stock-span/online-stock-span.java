@@ -1,27 +1,36 @@
-import java.util.Stack;
-
 class StockSpanner {
-    private Stack<Integer> stack;
-    private int[] prices;
-    private int index;
 
+    int i;
+    int x=0;
+    static Stack<Integer> sc;
+    static int[] arr;
     public StockSpanner() {
-        stack = new Stack<>();
-        prices = new int[10000]; // Increased to handle larger test cases
-        index = 0;
+        sc=new Stack<>();
+        arr=new int[10000];
+        i=0;
     }
-
+   
     public int next(int price) {
-        while (!stack.isEmpty() && price >= prices[stack.peek()]) {
-            stack.pop();
+        
+        while(!sc.isEmpty()&&price>=arr[sc.peek()])
+        {
+            sc.pop();
         }
-
-        int span = stack.isEmpty() ? index + 1 : index - stack.peek();
-
-        prices[index] = price;
-        stack.push(index);
-        index++;
-
-        return span;
+         if(sc.isEmpty())
+        {
+             x=i+1;
+        }
+        else
+        x=i-sc.peek();
+        arr[i]=price;
+        sc.push(i);
+        i++;
+        return x;
     }
 }
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner obj = new StockSpanner();
+ * int param_1 = obj.next(price);
+ */
