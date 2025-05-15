@@ -8,32 +8,18 @@
  * }
  */
 class Solution {
-    boolean gett(TreeNode root, ArrayList<TreeNode> path,int n)
-    {
-        if(root==null)
-        return false; 
-        path.add(root);
-        if(root.val==n)
-        return true;
-        if(gett(root.left,path,n)||gett(root.right,path,n))
-        {
-            return true;
-        }
-        path.remove(path.size()-1);
-        return false;
-    }
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        ArrayList<TreeNode> path1=new ArrayList<>();
-        gett(root,path1,p.val);
-        ArrayList<TreeNode> path2=new ArrayList<>();
-        gett(root,path2,q.val);
-        int i=0;
-        for( i=0;i<path1.size()&&i<path2.size();i++)
-        {
-            if(path1.get(i)!=path2.get(i))
-            break;
-        }
-
-        return path1.get(i-1);
+        if(root==null)
+        return null;
+        if(root==p||root==q)
+        return root;
+        TreeNode r1=lowestCommonAncestor(root.left, p, q);
+        TreeNode r2=lowestCommonAncestor(root.right, p, q);
+        if(r1==null)
+        return r2;
+        if(r2==null)
+        return r1;
+        //if(r1!=null&&r2!=null)
+        return root;
     }
 }
