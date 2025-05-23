@@ -47,7 +47,7 @@ class Solution {
         }
         else
         root.left=null;
-        if(slow.next!=null)
+        //if(slow.next!=null)
         {
             root.right=sortedListToBST(slow.next);
         }
